@@ -2,7 +2,7 @@
   "name": "oma-ui",
   "description": "Archive with modules for virtual user interfaces.",
   "main": "directory",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "keywords": [
     "JavaScript",
     "class scripts",
