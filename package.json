@@ -1,0 +1,21 @@
+{
+  "name": "oma-ui",
+  "description": "Archive with modules for virtual user interfaces.",
+  "main": "directory",
+  "version": "1.4.0",
+  "keywords": [
+    "JavaScript",
+    "class scripts",
+    "user interface",
+    "widgets"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-mainframe-architecture/oma-ui.git"
+  },
+  "author": "open.mainframe@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/open-mainframe-architecture/oma-ui/issues"
+  }
+}
