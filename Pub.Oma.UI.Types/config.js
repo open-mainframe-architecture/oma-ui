@@ -159,16 +159,6 @@ function configure(module) {
       CheckList: {
         $super: 'UI.Selection',
         direction: 'UI.Flow.Direction?'
-      },
-      Editor: {
-        $super: 'UI.Input+UI.Metal'
-      },
-      Edit: {
-        String: {
-          $super: 'UI.Input',
-          placeholder: 'string',
-          value: 'string @data=both @delay=flush'
-        }
       }
     }
   };
