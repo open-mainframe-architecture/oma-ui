@@ -1,11 +1,11 @@
 function configure(module) {
   "use strict";
-  module.description = 'This module defines datatypes for virtual user interfaces.'
-  module.datatype = {
+  module.description = 'This module defines datatypes for virtual user interfaces.';
+  module.datatypes = {
     UI: {
       // fixed height and width, measured in pixels
       Pixel: { height: 'number', width: 'number' },
-      // screen resolution and color depth (effective resolution subtracts space for taskbars)
+      // monitor resolution and color depth (effective resolution subtracts space for taskbars)
       Resolution: { colorDepth: 'number', pixel: 'UI.Pixel', effective: 'UI.Pixel' },
       // length is a numeric measurement in a spatial unit
       Length: { n: 'number', u: '"ch"_"em"_"ex"_"px"_"rem"' },
@@ -77,9 +77,12 @@ function configure(module) {
         // optional symbolic identifier for i18n purposes
         symbol: 'string?'
       },
-      // a frame widget surrounds a decorated subject
-      Frame: 'UI.Decorator+UI.Sizeable',
-      // a metal frame also creates a layout surface for magnets
+      // a sizeable frame widget surrounds a decorated subject
+      Frame: {
+        $macro: ['T=UI.Widget'],
+        $super: 'UI.Decorator(T)+UI.Sizeable',
+      },
+      // a metal frame creates a layout surface for magnets
       Metal: 'UI.Frame+UI.Layout(UI.Magnet)',
       // position of magnet frame is relative to metallic surface
       Magnet: {
@@ -126,7 +129,7 @@ function configure(module) {
         $super: 'UI.Output',
         content: 'Text?'
       },
-      // show graphics image
+      // show content of graphics image
       Image: {
         $super: 'UI.Output',
         asset: 'string?'

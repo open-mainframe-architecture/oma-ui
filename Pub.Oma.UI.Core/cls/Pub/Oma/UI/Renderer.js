@@ -4,8 +4,9 @@
     Service: true
   });
   I.play({
-    render: function (ui) {
+    // render virtual user interface and delegate interactions to controller
+    render: function (view, controller) {
 
     }
-  })
+  });
 })
