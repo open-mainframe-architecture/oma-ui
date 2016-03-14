@@ -3,8 +3,6 @@ function configure(module) {
   module.description = 'This module defines datatypes for virtual user interfaces.';
   module.datatypes = {
     UI: {
-      // fixed height and width, measured in pixels
-      Pixel: { height: 'number', width: 'number' },
       // monitor resolution and color depth (effective resolution subtracts space for taskbars)
       Resolution: { colorDepth: 'number', pixel: 'UI.Pixel', effective: 'UI.Pixel' },
       // length is a numeric measurement in a spatial unit
@@ -45,17 +43,17 @@ function configure(module) {
       },
       // a layout widget renders zero or more child widgets
       Layout: {
-        $macro: ['T=UI.Widget'],
+        $macro: ['W=UI.Widget'],
         $super: 'UI.Widget',
         // layouts might have dedicated children
-        widgets: 'Maybe([T]|<T>)'
+        widgets: 'Maybe([W]|<W>)'
       },
       // a decorator widget wraps an optional child widget
       Decorator: {
-        $macro: ['T=UI.Widget'],
+        $macro: ['W=UI.Widget'],
         $super: 'UI.Widget',
         // decorators might have dedicated children
-        subject: 'T?'
+        subject: 'W?'
       },
       // an input widget translates user interactions to actions in virtual user interface
       Input: {
@@ -68,8 +66,8 @@ function configure(module) {
         focused: 'boolean @event=client @delay=forever',
         // report keyboard activity, e.g. key down/up/repeat
         pressed: 'UI.Event.Keyboard @event=client @delay=forever',
-        // attempt to grab focus
-        focus: 'none @event=server'
+        // attempt to grab or drop focus
+        focus: 'boolean @event=server'
       },
       // an output widget displays noninteractive texts and graphics
       Output: {
@@ -79,14 +77,18 @@ function configure(module) {
       },
       // a sizeable frame widget surrounds a decorated subject
       Frame: {
-        $macro: ['T=UI.Widget'],
-        $super: 'UI.Decorator(T)+UI.Sizeable',
+        $macro: ['W=UI.Widget'],
+        $super: 'UI.Decorator(W)+UI.Sizeable',
       },
       // a metal frame creates a layout surface for magnets
-      Metal: 'UI.Frame+UI.Layout(UI.Magnet)',
+      Metal: {
+        $macro: ['W=UI.Widget', 'M=UI.Magnet'],
+        $super: 'UI.Frame(W)+UI.Layout(M)'
+      },
       // position of magnet frame is relative to metallic surface
       Magnet: {
-        $super: 'UI.Metal',
+        $macro: ['W=UI.Widget', 'M=UI.Magnet'],
+        $super: 'UI.Metal(W,M)',
         // fixate left position, relative to top left corner of metallic surface
         // if sizeable width is negative, also fixate the right position
         left: 'UI.Size?',
