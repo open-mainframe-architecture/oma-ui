@@ -1,3 +1,3 @@
-'BaseObject'.subclass(I => {
+'Object'.subclass(I => {
   "use strict";
 })
