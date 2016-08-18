@@ -3,7 +3,7 @@ function configure(module) {
   module.description = 'This module defines datatypes for virtual user interfaces.';
   module.datatypes = {
     // monitor resolution and color depth (effective resolution subtracts space for taskbars)
-    'UI.Resolution': { colorDepth: 'number', pixel: 'UI.Pixel', effective: 'UI.Pixel' },
+    'UI.Resolution': { colorDepth: 'number', pixel: 'Area', effectivePixel: 'Area' },
     // length is a numeric measurement in a spatial unit
     'UI.Length': { n: 'number', u: '"ch"_"em"_"ex"_"px"_"rem"' },
     // size is either explicit length or proportional number between 0 (0%) and 1 (100%)
